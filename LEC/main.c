@@ -20,6 +20,7 @@ int main() {
         printf("1. Menambah data siswa\n");
         printf("2. Menghapus data siswa");
         printf("3. Mencari data siswa\n");
+        printf("4. Keluar\n");
         printf("Pilih (1-3): ");
         scanf("%d", &pilihan);
         
