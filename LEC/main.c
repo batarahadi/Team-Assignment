@@ -3,21 +3,31 @@
 #include <stdlib.h>
 
 struct templetSiswa {
-    char nama[50];
+    char nama[20];
     int umur;
     char nomorRegistrasi[10];
 };
 
+void clearScreen() {
+#ifdef _WIN32
+    system("cls");     // Windows
+#else
+    system("clear");   // Linux / macOS / Armbian / Debian
+#endif
+}
+
 void tambahDataSiswa() {
+    clearScreen();
     struct templetSiswa siswaBaru;
     FILE *dataSiswa = fopen("dataSiswa.txt", "a");
     if (dataSiswa == NULL) {
         printf("Gagal membuka file.\n");
         return;
     }
-
     printf("Masukkan nama siswa: ");
-    scanf("%[^\n]", siswaBaru.nama);
+    getchar();
+    fgets(siswaBaru.nama, sizeof(siswaBaru.nama), stdin);
+    siswaBaru.nama[strcspn(siswaBaru.nama, "\n")] = 0; // Hapus newline yang mungkin tersisa di akhir string
     printf("Masukkan umur siswa: ");
     scanf("%d", &siswaBaru.umur);
     printf("Masukkan nomor registrasi siswa 10 angka: ");
@@ -28,6 +38,14 @@ void tambahDataSiswa() {
     printf("Data siswa berhasil ditambahkan.\n");
 }
 
+void hapusDataSiswa() {
+    clearScreen();
+    char nama[20];
+    char nomor[10];
+    int tmpAngka;
+    printf("Program ini akan menghapus data siswa.\nMenghapus data siswa berdasarkan?\n1. Nama\n2. Nomor registrasi.\n Pilih (1/2): ");
+
+}
 
 
 int main() {
@@ -37,32 +55,27 @@ int main() {
     int pilihan;
 
     while (1) {
-        printf("\n=== Manajemen Siswa ===\n");
+        clearScreen();
+        printf("\n=== Manajemen Siswa ===\n\n");
+        printf("Pilih opsi:\n");
         printf("1. Menambah data siswa\n");
         printf("2. Menghapus data siswa");
         printf("3. Mencari data siswa\n");
-        printf("4. Keluar\n");
-        printf("Pilih (1-3): ");
+        printf("4. Keluar\n\n");
+        printf("Masukkan pilihan (1-4): ");
         scanf("%d", &pilihan);
         
+        if (pilihan != 1 && pilihan != 2 && pilihan != 3 && pilihan != 4) {
+            printf("Pilihan tidak valid, keluar dari program\n");
+            break;
+        }
+
         switch (pilihan) {
-            case (1) : tambahDataSiswa();
-            // case 2:
-            // printf("Menghapus data siswa...\n");
-// 
-// 
+            case 1 : tambahDataSiswa(); continue;
+            case 2: hapusDataSiswa(); continue;
             // case 3:
-                // printf("Mencari data siswa...\n");
-
-
-            case 4:
-                printf("Keluar dari program.\n");
-                return 0;
-                break;
-            default:
-                printf("Pilihan tidak valid, keluar dari program\n");
-                break;
-        }   
+            default : exit(0);
+        }
     }
 
     return 0;
