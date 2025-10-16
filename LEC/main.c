@@ -43,7 +43,7 @@ void tambahDataSiswa() {
     printf("Data siswa berhasil ditambahkan.\n");
 }
 
-// (BELUM SELESAI) Menghapus data siswa bedasarkan pilihan user
+// (SELESAI) Menghapus data siswa bedasarkan pilihan user
 void hapusDataSiswa() {
     clearScreen();
     char nama[20];
@@ -155,8 +155,8 @@ int main() {
         }
 
         switch (pilihanWhile) {
-            case 1 : tambahDataSiswa(); continue;
-            case 2 : hapusDataSiswa(); continue; // INI BELUM SELESAI
+            case 1 : tambahDataSiswa(); continue; // SELESAI
+            case 2 : hapusDataSiswa(); continue; // SELESAI
             case 3 : cariDataSiswa(); break; // INI BELUM ADA FITURNYA
             default : exit(0);
         }
