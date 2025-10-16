@@ -58,12 +58,12 @@ void hapusDataSiswa() {
     printf("=== Menghapus Data Siswa ===\n\n");
     printf("Program ini akan menghapus data siswa.\nAnda ingin menghapus data siswa berdasarkan apa?\n1. Nama\n2. Nomor registrasi.\n Pilih Anda: ");
     scanf("%d", &tmpAngka);
-    if (tmpAngka == 1) {
+    if (tmpAngka == 1) { // BELUM SELESAI ATAU BELUM ADA FITURNYA
         printf("Masukkan nama siswa yang akan dihapus: ");
-        // BELUM SELESAI ATAU BELUM ADA FITURNYA
+        
 
     }
-    else if (tmpAngka == 2) {
+    else if (tmpAngka == 2) { // BELUM SELESAI
         printf("Masukkan nomor registrasi siswa yang akan dihapus: ");
         scanf("%s", nomor);
     }
@@ -79,6 +79,7 @@ void cariDataSiswa() {
     printf("=== Mencari Data Siswa ===\n\n");
     printf("Program ini akan mencari data siswa.\n");
     printf("Fitur ini belum tersedia.\n");
+    
     // INI BELUM ADA FITURNYA ATAU BELUM ADA FITURNYA
 }
 
