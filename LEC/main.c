@@ -71,6 +71,8 @@ void hapusDataSiswa() {
         printf("Pilihan tidak valid, kembali ke menu utama.\n");
         return;
     }
+
+    
 }
 
 // (BELUM SELESAI) Mencari data siswa
