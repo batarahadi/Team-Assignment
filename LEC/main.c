@@ -49,7 +49,7 @@ void hapusDataSiswa() {
     char nama[20];
     char nomor[10];
     int tmpAngka;
-    FILE *dataSiswa = fopen("dataSiswa.txt", "r+");
+    FILE *dataSiswa = fopen("dataSiswa.txt", "r");
     if (dataSiswa == NULL) {
         printf("Gagal membuka file.\n");
         return;
@@ -58,21 +58,72 @@ void hapusDataSiswa() {
     printf("=== Menghapus Data Siswa ===\n\n");
     printf("Program ini akan menghapus data siswa.\nAnda ingin menghapus data siswa berdasarkan apa?\n1. Nama\n2. Nomor registrasi.\n Pilih Anda: ");
     scanf("%d", &tmpAngka);
-    if (tmpAngka == 1) { // BELUM SELESAI ATAU BELUM ADA FITURNYA
-        printf("Masukkan nama siswa yang akan dihapus: ");
-        
+    getchar();
 
+    if (tmpAngka == 1) {
+        printf("Masukkan nama siswa yang akan dihapus: ");
+        fgets(nama, sizeof(nama), stdin);
+        nama[strcspn(nama, "\n")] = 0; // hapus newline
+
+        FILE *temp = fopen("temp.txt", "w");
+        char line[100];
+        int found = 0;
+
+        while (fgets(line, sizeof(line), dataSiswa)) {
+            char namaSiswa[50], nomorReg[20];
+            int umur;
+            sscanf(line, "%[^,],%d,%s", namaSiswa, &umur, nomorReg);
+
+            if (strcmp(namaSiswa, nama) != 0) {
+                fprintf(temp, "%s", line);
+            } else {
+                found = 1;
+            }
+        }
+
+        fclose(dataSiswa);
+        fclose(temp);
+        remove("dataSiswa.txt");
+        rename("temp.txt", "dataSiswa.txt");
+
+        if (found) {
+            printf("Data siswa bernama '%s' berhasil dihapus.\n", nama);}
+        else {
+            printf("Data siswa bernama '%s' tidak ditemukan.\n", nama);}
     }
-    else if (tmpAngka == 2) { // BELUM SELESAI
+    else if (tmpAngka == 2) {
         printf("Masukkan nomor registrasi siswa yang akan dihapus: ");
         scanf("%s", nomor);
+
+        FILE *temp = fopen("temp.txt", "w");
+        char line[100];
+        int found = 0;
+
+        while (fgets(line, sizeof(line), dataSiswa)) {
+            char nama[50], nomorReg[20];
+            int umur;
+            sscanf(line, "%[^,],%d,%s", nama, &umur, nomorReg);
+
+            if (strcmp(nomorReg, nomor) != 0) {
+                fprintf(temp, "%s", line);
+            } else {
+                found = 1;
+            }
+        }
+        fclose(dataSiswa);
+        fclose(temp);
+        remove("dataSiswa.txt");
+        rename("temp.txt", "dataSiswa.txt");
+
+        if (found)
+            printf("Data berhasil dihapus.\n");
+        else
+            printf("Data tidak ditemukan.\n");
     }
     else {
         printf("Pilihan tidak valid, kembali ke menu utama.\n");
         return;
     }
-
-    fclose("dataSiswa.txt");
 }
 
 // (BELUM SELESAI) Mencari data siswa
@@ -106,7 +157,7 @@ int main() {
         switch (pilihanWhile) {
             case 1 : tambahDataSiswa(); continue;
             case 2 : hapusDataSiswa(); continue; // INI BELUM SELESAI
-            case 3 : cariDataSiswa(); continue; // INI BELUM ADA FITURNYA
+            case 3 : cariDataSiswa(); break; // INI BELUM ADA FITURNYA
             default : exit(0);
         }
     }
