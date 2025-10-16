@@ -17,7 +17,7 @@ void clearScreen() {
 #endif
 }
 
-// Menambah data siswa
+// (SELESAI) Menambah data siswa
 void tambahDataSiswa() {
     clearScreen();
     struct templetSiswa siswaBaru;
@@ -43,6 +43,7 @@ void tambahDataSiswa() {
     printf("Data siswa berhasil ditambahkan.\n");
 }
 
+// (BELUM SELESAI) Menghapus data siswa bedasarkan pilihan user
 void hapusDataSiswa() {
     clearScreen();
     char nama[20];
@@ -59,6 +60,7 @@ void hapusDataSiswa() {
     scanf("%d", &tmpAngka);
     if (tmpAngka == 1) {
         printf("Masukkan nama siswa yang akan dihapus: ");
+        // BELUM SELESAI ATAU BELUM ADA FITURNYA
 
     }
     else if (tmpAngka == 2) {
@@ -71,15 +73,19 @@ void hapusDataSiswa() {
     }
 }
 
+// (BELUM SELESAI) Mencari data siswa
+void cariDataSiswa() {
+    clearScreen();
+    printf("=== Mencari Data Siswa ===\n\n");
+    printf("Program ini akan mencari data siswa.\n");
+    printf("Fitur ini belum tersedia.\n");
+    // INI BELUM ADA FITURNYA ATAU BELUM ADA FITURNYA
+}
 
 int main() {
-    FILE *dataSiswa;
-    struct templetSiswa siswaBaru;
+    int pilihanWhile;
     
-    int pilihan;
-
     while (1) {
-        clearScreen();
         printf("\n=== Manajemen Siswa ===\n\n");
         printf("Pilih opsi:\n");
         printf("1. Menambah Data Siswa\n");
@@ -87,17 +93,17 @@ int main() {
         printf("3. Mencari Data Siswa\n");
         printf("4. Keluar\n\n");
         printf("Masukkan Pilihan Anda: ");
-        scanf("%d", &pilihan);
+        scanf("%d", &pilihanWhile);
         
-        if (pilihan != 1 && pilihan != 2 && pilihan != 3 && pilihan != 4) {
+        if (pilihanWhile != 1 && pilihanWhile != 2 && pilihanWhile != 3 && pilihanWhile != 4) {
             printf("Pilihan tidak valid, keluar dari program\n");
             break;
         }
 
-        switch (pilihan) {
+        switch (pilihanWhile) {
             case 1 : tambahDataSiswa(); continue;
-            case 2: hapusDataSiswa(); continue;
-            // case 3:
+            case 2 : hapusDataSiswa(); continue; // INI BELUM SELESAI
+            case 3 : cariDataSiswa(); continue; // INI BELUM ADA FITURNYA
             default : exit(0);
         }
     }
