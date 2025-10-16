@@ -5,10 +5,10 @@
 struct templetSiswa {
     char nama[50];
     int umur;
-    int nomorRegistrasi[10];
+    char nomorRegistrasi[10];
 };
 
-void tambahDataSiswa {
+void tambahDataSiswa() {
     struct templetSiswa siswaBaru;
     FILE *dataSiswa = fopen("dataSiswa.txt", "a");
     if (dataSiswa == NULL) {
@@ -20,13 +20,14 @@ void tambahDataSiswa {
     scanf("%[^\n]", siswaBaru.nama);
     printf("Masukkan umur siswa: ");
     scanf("%d", &siswaBaru.umur);
-    printf("Masukkan nomor registrasi siswa: ");
-    scanf("%d", &siswaBaru.nomorRegistrasi);
+    printf("Masukkan nomor registrasi siswa 10 angka: ");
+    scanf("%s", siswaBaru.nomorRegistrasi);
 
-    fprintf(dataSiswa, "%s, %d, %d\n", siswaBaru.nama, siswaBaru.umur, siswaBaru.nomorRegistrasi);
+    fprintf(dataSiswa, "%s, %d, %s\n", siswaBaru.nama, siswaBaru.umur, siswaBaru.nomorRegistrasi);
     fclose(dataSiswa);
     printf("Data siswa berhasil ditambahkan.\n");
 }
+
 
 
 int main() {
