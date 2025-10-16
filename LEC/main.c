@@ -72,7 +72,7 @@ void hapusDataSiswa() {
         return;
     }
 
-    fclose("dataSiswa.txt")
+    fclose("dataSiswa.txt");
 }
 
 // (BELUM SELESAI) Mencari data siswa
