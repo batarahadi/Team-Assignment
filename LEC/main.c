@@ -8,6 +8,26 @@ struct templetSiswa {
     int nomorRegistrasi[10];
 };
 
+void tambahDataSiswa {
+    struct templetSiswa siswaBaru;
+    FILE *dataSiswa = fopen("dataSiswa.txt", "a");
+    if (dataSiswa == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    printf("Masukkan nama siswa: ");
+    scanf("%[^\n]", siswaBaru.nama);
+    printf("Masukkan umur siswa: ");
+    scanf("%d", &siswaBaru.umur);
+    printf("Masukkan nomor registrasi siswa: ");
+    scanf("%d", &siswaBaru.nomorRegistrasi);
+
+    fprintf(dataSiswa, "%s, %d, %d\n", siswaBaru.nama, siswaBaru.umur, siswaBaru.nomorRegistrasi);
+    fclose(dataSiswa);
+    printf("Data siswa berhasil ditambahkan.\n");
+}
+
 
 int main() {
     FILE *dataSiswa;
@@ -24,17 +44,14 @@ int main() {
         printf("Pilih (1-3): ");
         scanf("%d", &pilihan);
         
-        which (pilihan) {
-            case 1:
-                printf("Menambah data siswa...\n");
-
-                
-            case 2:
-                printf("Menghapus data siswa...\n");
-
-
-            case 3:
-                printf("Mencari data siswa...\n");
+        switch (pilihan) {
+            case (1) : tambahDataSiswa();
+            // case 2:
+            // printf("Menghapus data siswa...\n");
+// 
+// 
+            // case 3:
+                // printf("Mencari data siswa...\n");
 
 
             case 4:
