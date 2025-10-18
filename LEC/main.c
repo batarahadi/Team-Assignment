@@ -2,13 +2,19 @@
 #include <string.h>
 #include <stdlib.h>
 
+/** Struktur data untuk menyimpan data siswa 
+ * berfungsi sebagai template data siswa dan
+ * menyimpan data sementara saat penambahan data siswa
+*/
 struct templetSiswa {
     char nama[20];
     int umur;
     char nomorRegistrasi[10];
 };
 
-// Fungsi untuk membersihkan layar terminal otomatis dan sudah disesuaikan dengan OS pengguna
+/* Funtion untuk membersihkan layar terminal otomatis dan sudah disesuaikan dengan OS pengguna,
+dan akan saya tambahkan pada setiap fungsi agar terlihat lebih rapi
+*/
 void clearScreen() {
 #ifdef _WIN32
     system("cls");     // Windows
@@ -17,7 +23,10 @@ void clearScreen() {
 #endif
 }
 
-// (SELESAI) Menambah data siswa
+/*(SELESAI) Menambah data siswa, 
+berfungsi untuk menambahkan data siswa ke file dataSiswa.txt,
+jika file tidak ada maka akan membuat file baru secara otomatis
+*/
 void tambahDataSiswa() {
     clearScreen();
     struct templetSiswa siswaBaru;
@@ -43,7 +52,8 @@ void tambahDataSiswa() {
     printf("Data siswa berhasil ditambahkan.\n");
 }
 
-// (SELESAI) Menghapus data siswa bedasarkan pilihan user
+/*(SELESAI) Menghapus data siswa bedasarkan pilihan user menggunakan nama atau nomor registrasi,
+jika pilihan user salah maka akan kembali ke menu utama*/
 void hapusDataSiswa() {
     clearScreen();
     char nama[20];
@@ -60,7 +70,7 @@ void hapusDataSiswa() {
     scanf("%d", &tmpAngka);
     getchar();
 
-    if (tmpAngka == 1) {
+    if (tmpAngka == 1) {                                                // if pertama menggunakan nama sebagai acuan penghapusan
         printf("Masukkan nama siswa yang akan dihapus: ");
         fgets(nama, sizeof(nama), stdin);
         nama[strcspn(nama, "\n")] = 0; // hapus newline
@@ -69,9 +79,9 @@ void hapusDataSiswa() {
         char line[100];
         int found = 0;
 
-        while (fgets(line, sizeof(line), dataSiswa)) {
-            char namaSiswa[50], nomorReg[20];
-            int umur;
+        while (fgets(line, sizeof(line), dataSiswa)) {                  // membaca setiap baris
+            char namaSiswa[50], nomorReg[20];                           // variabel namaSiswa, nomorReg, umur adalah
+            int umur;                                                   // variabel sementara untuk menyimpan data
             sscanf(line, "%[^,],%d,%s", namaSiswa, &umur, nomorReg);
 
             if (strcmp(namaSiswa, nama) != 0) {
@@ -86,12 +96,12 @@ void hapusDataSiswa() {
         remove("dataSiswa.txt");
         rename("temp.txt", "dataSiswa.txt");
 
-        if (found) {
-            printf("Data siswa bernama '%s' berhasil dihapus.\n", nama);}
-        else {
-            printf("Data siswa bernama '%s' tidak ditemukan.\n", nama);}
+        if (found) {                                                                // jika data ditemukan
+            printf("Data siswa bernama '%s' berhasil dihapus.\n", nama);}           // akan menampilkan pesan berhasil
+        else {                                                                      // jika data tidak ditemukan
+            printf("Data siswa bernama '%s' tidak ditemukan.\n", nama);}            // akan menampilkan pesan seperti berikut
     }
-    else if (tmpAngka == 2) {
+    else if (tmpAngka == 2) {                                             // else if kedua menggunakan nomor registrasi sebagai acuan penghapusan
         printf("Masukkan nomor registrasi siswa yang akan dihapus: ");
         scanf("%s", nomor);
 
@@ -126,14 +136,44 @@ void hapusDataSiswa() {
     }
 }
 
-// (BELUM SELESAI) Mencari data siswa
+/* (BELUM SELESAI) Mencari data siswa
+mencari data siswa berdasarkan nama atau nomor registrasi*/
 void cariDataSiswa() {
     clearScreen();
+    char nama[20];
+    char nomor[10];
+    int tampNilai;
+    FILE *dataSiswa = fopen("dataSiswa.txt", "r");
+    if (dataSiswa == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
     printf("=== Mencari Data Siswa ===\n\n");
     printf("Program ini akan mencari data siswa.\n");
-    printf("Fitur ini belum tersedia.\n");
+    printf("Anda ingin mencari data siswa berdasarkan apa?\n1. Nama\n2. Nomor registrasi.\n Pilih Anda: ");
+    scanf("%d", &tampNilai);
+    getchar();
+
+    if (tampNilai == 1) {
+        printf("Masukkan nama siswa yang akan dicari: ");
+        fgets(nama, sizeof(nama), stdin);
+        
+        // Cari ini belum ada fiturnya
+    }
+    else if (tampNilai == 2) {
+        printf("Masukkan nomor registrasi siswa yang akan dicari: ");
+        scanf("%s", nomor);
+
+        // Cari ini belum ada fiturnya
+    }
+    else {
+        printf("Pilihan tidak valid, kembali ke menu utama.\n");
+        return;
+    }
     
     // INI BELUM ADA FITURNYA ATAU BELUM ADA FITURNYA
+    fclose(dataSiswa);
 }
 
 int main() {
